@@ -1,0 +1,8 @@
+Menadzer obiektow
+kolizja postaci
+kolizja pomiedzy obiektami
+animacje
+lepsze grafiki
+menadzer ui
+jeden rodzaj przycisku
+zmienianie stanow gry
