@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import main.Handler;
 import main.entity.creature.Player;
+import main.entity.statics.Tree;
 
 public class EntityManager {
 
@@ -43,6 +44,10 @@ public class EntityManager {
 			if(!e.isActive()) it.remove();;
 		}
 		entities.sort(renderSorter);
+		if(handler.getKeyManager().k)
+		{
+			handler.getWorld().getEntityManager().addEntity(new Tree(handler, handler.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset(), handler.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset()));
+		}
 	}
 	
 	//renders all entities

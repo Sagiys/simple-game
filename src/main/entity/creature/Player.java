@@ -11,6 +11,7 @@ import main.entity.statics.Tree;
 import main.gfx.Animation;
 import main.gfx.Assets;
 import main.gui.Gui;
+import main.inventory.Inventory;
 import main.tiles.Tile;
 
 
@@ -26,9 +27,10 @@ public class Player extends Creature{
 	private Animation idleAnimation;
 	private Rectangle ar;
 	private Gui gui;
+	private Inventory inv;
 	
 	//temp attack variables
-	private long lastAttackTimer, attackCooldown = 100, attackTimer = attackCooldown;
+	private long lastAttackTimer, attackCooldown = 10, attackTimer = attackCooldown;
 	
 	
 // mouse detection stuff
@@ -67,6 +69,8 @@ public class Player extends Creature{
 		
 		gui = new Gui(this);
 		
+		inv = new Inventory(handler);
+		
 		health = MAX_HP;
 	}
 	
@@ -93,6 +97,7 @@ public class Player extends Creature{
 		handler.getGameCamera().centerOnEntity(this); //centering camera on player
 		checkAttacks();
 		gui.update();
+		inv.update();
 	}
 	//temp attack code
 	private void checkAttacks()
@@ -209,10 +214,6 @@ public class Player extends Creature{
 				facing = "right";
 				xMove = +speed;
 			}
-		if(handler.getKeyManager().k)
-		{
-			handler.getWorld().getEntityManager().addEntity(new Tree(handler, handler.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset(), handler.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset()));
-		}
 	}
 
 	@Override
@@ -228,6 +229,7 @@ public class Player extends Creature{
 		g.setColor(java.awt.Color.blue);
 		if(ar.x != 0)g.fillRect(ar.x - (int) handler.getGameCamera().getxOffset(), ar.y - (int)handler.getGameCamera().getyOffset(), ar.width, ar.height);
 		gui.render(g);
+		inv.render(g);
 	}
 
 	//returns current frame of current animation
@@ -276,5 +278,13 @@ public class Player extends Creature{
 	public int getMaxHP()
 	{
 		return MAX_HP;
+	}
+
+	public Inventory getInv() {
+		return inv;
+	}
+
+	public void setInv(Inventory inv) {
+		this.inv = inv;
 	}
 }

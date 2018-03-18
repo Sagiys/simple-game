@@ -1,6 +1,8 @@
 package main.items;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import main.Handler;
@@ -9,30 +11,43 @@ import main.gfx.Assets;
 public class Item {
 
 	public static Item[] items = new Item[256];
-	public static Item woodItem = new Item(Assets.wood, "Wood", 0);
+	public static Item woodItem = new Item(Assets.wood, "Wood", 0, 10);
 	
-	public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32, PICKED_UP = -1;
+	public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
 	
 	protected Handler handler;
 	protected BufferedImage texture;
 	protected String name;
 	protected final int id;
 	
-	protected int x, y, count;
+	protected Rectangle bounds;
 	
-	public Item(BufferedImage texture, String name, int id)
+	protected int x, y, count;
+	protected boolean pickedUp = false;
+	protected int stack;
+	
+	public Item(BufferedImage texture, String name, int id, int stack)
 	{
 		this.texture = texture;
 		this.name = name;
 		this.id = id;
+		this.stack = stack;
 		count = 1;
+		
+		bounds = new Rectangle(x, y , ITEMWIDTH, ITEMHEIGHT);
 		
 		items[id] = this;
 	}
 	
+	
+	
 	public void update()
 	{
-		
+		if(handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0, 0).intersects(bounds))
+		{
+			pickedUp = true;
+			handler.getWorld().getEntityManager().getPlayer().getInv().addItem(this);
+		}
 	}
 	
 	public void render(Graphics g, int x , int y)
@@ -50,11 +65,13 @@ public class Item {
 	{
 		this.x = x;
 		this.y = y;
+		bounds.x = x;
+		bounds.y = y;
 	}
 	
 	public Item createNew(int x, int y)
 	{
-		Item i = new Item(texture, name, id);
+		Item i = new Item(texture, name, id, stack);
 		i.setPosition(x, y);
 		return i;
 	}
@@ -109,5 +126,17 @@ public class Item {
 
 	public int getId() {
 		return id;
+	}
+
+	public boolean isPickedUp() {
+		return pickedUp;
+	}
+
+	public int getStack() {
+		return stack;
+	}
+
+	public void setStack(int stack) {
+		this.stack = stack;
 	}
 }
