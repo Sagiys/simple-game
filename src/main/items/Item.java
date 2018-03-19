@@ -11,7 +11,10 @@ import main.gfx.Assets;
 public class Item {
 
 	public static Item[] items = new Item[256];
-	public static Item woodItem = new Item(Assets.wood, "Wood", 0, 10);
+	public static Item woodItem = new Item(Assets.wood, "Wood", 0);
+	public static Item oneItem = new Item(Assets.wood, "One", 1);
+	public static Item twoItem = new Item(Assets.wood, "Two", 2);
+	public static Item swordItem = new Item(Assets.sword, "Sword", 3);
 	
 	public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
 	
@@ -24,14 +27,12 @@ public class Item {
 	
 	protected int x, y, count;
 	protected boolean pickedUp = false;
-	protected int stack;
 	
-	public Item(BufferedImage texture, String name, int id, int stack)
+	public Item(BufferedImage texture, String name, int id)
 	{
 		this.texture = texture;
 		this.name = name;
 		this.id = id;
-		this.stack = stack;
 		count = 1;
 		
 		bounds = new Rectangle(x, y , ITEMWIDTH, ITEMHEIGHT);
@@ -71,8 +72,16 @@ public class Item {
 	
 	public Item createNew(int x, int y)
 	{
-		Item i = new Item(texture, name, id, stack);
+		Item i = new Item(texture, name, id);
 		i.setPosition(x, y);
+		return i;
+	}
+	
+	public Item createNew(int count)
+	{
+		Item i = new Item(texture, name, id);
+		i.setPickedUp(true);
+		i.setCount(count);
 		return i;
 	}
 
@@ -132,11 +141,7 @@ public class Item {
 		return pickedUp;
 	}
 
-	public int getStack() {
-		return stack;
-	}
-
-	public void setStack(int stack) {
-		this.stack = stack;
+	public void setPickedUp(boolean pickedUp) {
+		this.pickedUp = pickedUp;
 	}
 }

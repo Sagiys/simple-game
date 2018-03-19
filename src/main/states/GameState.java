@@ -3,7 +3,7 @@ package main.states;
 import java.awt.Graphics;
 
 import main.Handler;
-import main.gui.Gui;
+import main.ui.Gui;
 import main.worlds.World;
 
 public class GameState extends State{

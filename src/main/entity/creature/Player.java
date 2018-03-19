@@ -10,9 +10,9 @@ import main.entity.Entity;
 import main.entity.statics.Tree;
 import main.gfx.Animation;
 import main.gfx.Assets;
-import main.gui.Gui;
 import main.inventory.Inventory;
 import main.tiles.Tile;
+import main.ui.Gui;
 
 
 //jezeli tak to jakas akcja
@@ -28,9 +28,12 @@ public class Player extends Creature{
 	private Rectangle ar;
 	private Gui gui;
 	private Inventory inv;
+	private int lvl, currentXP, maxXP; 
+	private boolean lvlUp = false;
+	private int dmg;
 	
 	//temp attack variables
-	private long lastAttackTimer, attackCooldown = 10, attackTimer = attackCooldown;
+	private long lastAttackTimer, attackCooldown = 100, attackTimer = attackCooldown;
 	
 	
 // mouse detection stuff
@@ -71,6 +74,11 @@ public class Player extends Creature{
 		
 		inv = new Inventory(handler);
 		
+		lvl = 1;
+		currentXP = 0;
+		maxXP = 100;
+		dmg = 2;
+		
 		health = MAX_HP;
 	}
 	
@@ -98,13 +106,33 @@ public class Player extends Creature{
 		checkAttacks();
 		gui.update();
 		inv.update();
+		if(currentXP >= maxXP) lvlUp = true;
+		if(lvlUp) levelUP();
+	}
+	
+	public void dmgUp()
+	{
+		dmg += dmg;
+	}
+	
+	private void levelUP()
+	{
+		lvl++;
+		currentXP = currentXP - maxXP;
+		maxXP = (int) (lvl * maxXP * 1.31415726);
+		dmg = dmg * lvl;
+		lvlUp = false;
 	}
 	//temp attack code
 	private void checkAttacks()
 	{
 		attackTimer += System.currentTimeMillis() - lastAttackTimer;
 		lastAttackTimer = System.currentTimeMillis();
-		if(attackTimer < attackCooldown) return;
+		if(attackTimer < attackCooldown) {
+			return;
+		}
+		
+		if(inv.isActive()) return;
 		
 		Rectangle cb = getCollisionBounds(0,0);
 		ar = new Rectangle();
@@ -150,7 +178,7 @@ public class Player extends Creature{
 				if(e.equals(this)) continue;
 				if(e.getCollisionBounds(0, 0).intersects(ar))
 				{
-					e.hurt(2);
+					e.hurt(dmg);
 					return;
 				}
 			}
@@ -180,6 +208,7 @@ public class Player extends Creature{
 	//updating movement variables
 	private void getMouseInput()
 	{
+		if(inv.isActive()) return;
 		if(handler.getMouseManager().isLeftPressed() == true) 
 		{
 			if(pol[0].contains(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY())) facing = "top";
@@ -191,6 +220,7 @@ public class Player extends Creature{
 	
 	private void getInput()
 	{
+		if(inv.isActive()) return;
 		xMove = 0;
 		yMove = 0;
 		
@@ -228,6 +258,10 @@ public class Player extends Creature{
 				bounds.width, bounds.height);
 		g.setColor(java.awt.Color.blue);
 		if(ar.x != 0)g.fillRect(ar.x - (int) handler.getGameCamera().getxOffset(), ar.y - (int)handler.getGameCamera().getyOffset(), ar.width, ar.height);
+	}
+	
+	public void postRender(Graphics g)
+	{
 		gui.render(g);
 		inv.render(g);
 	}
@@ -253,6 +287,11 @@ public class Player extends Creature{
 		}
 		return null;
 		
+	}
+	
+	public void addXP(int amount)
+	{
+		currentXP += amount;
 	}
 	
 	public boolean isScrolling()
@@ -286,5 +325,25 @@ public class Player extends Creature{
 
 	public void setInv(Inventory inv) {
 		this.inv = inv;
+	}
+
+	public int getLvl() {
+		return lvl;
+	}
+
+	public int getCurrentXP() {
+		return currentXP;
+	}
+
+	public int getMaxXP() {
+		return maxXP;
+	}
+
+	public int getDmg() {
+		return dmg;
+	}
+
+	public void setDmg(int dmg) {
+		this.dmg = dmg;
 	}
 }

@@ -24,6 +24,7 @@ public class Tree extends StaticEntity{
 	public void die()
 	{
 		handler.getWorld().getItemManager().addItem(Item.woodItem.createNew((int)x + width / 2, (int)y + height / 2));
+		handler.getWorld().getEntityManager().getPlayer().addXP(15);
 	}
 
 	@Override

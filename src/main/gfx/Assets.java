@@ -15,6 +15,8 @@ public class Assets {
 	
 	// font
 	public static Font menuFont;
+	public static Font invFont;
+	public static Font guiFont;
 	
 	//default dimensions
 	private static final int TILE64HEIGHT = 64;
@@ -28,6 +30,10 @@ public class Assets {
 	public static BufferedImage gui;
 	public static BufferedImage rect;
 	public static BufferedImage wood;
+	public static BufferedImage sword;
+	public static BufferedImage inventory;
+	public static BufferedImage chest;
+	public static BufferedImage interract;
 	//tiles graphics
 	public static BufferedImage grass, dirt, tree, rock;
 	// menu graphics
@@ -104,9 +110,15 @@ public class Assets {
 		gui = Utils.loadImage("/textures/gui.png");
 		rect = Utils.loadImage("/textures/rect.png");
 		wood = Utils.loadImage("/textures/wood.png");
+		sword = Utils.loadImage("/textures/sword.png");
+		chest = Utils.loadImage("/textures/chest.png");
+		inventory = Utils.loadImage("/textures/inventory.png");
+		interract = Utils.loadImage("/textures/interact.png");
 		
 		//loading font
 		menuFont = Utils.loadFont("/fonts/Gputeks-Regular.ttf");
+		invFont = Utils.loadFont("/fonts/Gputeks-Regular.ttf").deriveFont(Font.PLAIN, 24);
+		guiFont = Utils.loadFont("/fonts/Gputeks-Regular.ttf").deriveFont(Font.PLAIN, 20);
 	}
 	
 }

@@ -41,7 +41,7 @@ public class EntityManager {
 		{
 			Entity e = it.next();
 			e.update();
-			if(!e.isActive()) it.remove();;
+			if(!e.isActive()) it.remove();
 		}
 		entities.sort(renderSorter);
 		if(handler.getKeyManager().k)
@@ -57,6 +57,7 @@ public class EntityManager {
 		{
 			e.render(g);
 		}
+		player.postRender(g);
 	}
 	
 	public void addEntity(Entity e)

@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import main.Handler;
 import main.entity.EntityManager;
 import main.entity.creature.Player;
+import main.entity.statics.Chest;
+import main.entity.statics.Trap;
 import main.entity.statics.Tree;
 import main.items.ItemManager;
 import main.tiles.Tile;
@@ -26,6 +28,8 @@ public class World {
 		itemManager = new ItemManager(handler);
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100)); // 0
 		entityManager.addEntity(new Tree(handler, 100, 300)); // 1
+		entityManager.addEntity(new Chest(handler, 300, 300)); // 1
+		entityManager.addEntity(new Trap(handler, 500, 300)); // 1
 		
 		loadWorld(path);
 		
