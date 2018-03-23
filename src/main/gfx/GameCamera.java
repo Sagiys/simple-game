@@ -8,6 +8,7 @@ public class GameCamera {
 
 	private float xOffset, yOffset;
 	private Handler handler;
+	public boolean checkin = true;
 	
 	public GameCamera(Handler handler,float xOffset, float yOffset)
 	{
@@ -28,9 +29,11 @@ public class GameCamera {
 	//centering on entity
 	public void centerOnEntity(Entity e)
 	{
-		xOffset = e.getX() - (handler.getWidth() / 2 + e.getWidth() / 2) + 150;
-		yOffset = e.getY() - handler.getHeight() / 2 + e.getHeight() / 2;
-		checkBlankSpace();
+		if(checkin) {
+			xOffset = e.getX() - (handler.getWidth() / 2 + e.getWidth() / 2) + 150;
+			yOffset = e.getY() - handler.getHeight() / 2 + e.getHeight() / 2;
+			checkBlankSpace();
+		}
 	}
 	
 	public void move(float xAmt, float yAmt)

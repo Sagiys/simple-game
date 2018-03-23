@@ -5,9 +5,14 @@ import java.awt.Graphics;
 import main.Handler;
 import main.entity.EntityManager;
 import main.entity.creature.Player;
+import main.entity.statics.Barrier;
 import main.entity.statics.Chest;
+import main.entity.statics.House;
+import main.entity.statics.Tp1;
+import main.entity.statics.Tp2;
 import main.entity.statics.Trap;
 import main.entity.statics.Tree;
+import main.gfx.Assets;
 import main.items.ItemManager;
 import main.tiles.Tile;
 import main.utils.Utils;
@@ -30,6 +35,13 @@ public class World {
 		entityManager.addEntity(new Tree(handler, 100, 300)); // 1
 		entityManager.addEntity(new Chest(handler, 300, 300)); // 1
 		entityManager.addEntity(new Trap(handler, 500, 300)); // 1
+		entityManager.addEntity(new House(handler, 800, 200));
+		entityManager.addEntity(new Tp1(handler, 1000, 350));
+		entityManager.addEntity(new Tp2(handler, 10400, 770));
+		entityManager.addEntity(new Barrier(handler, 5000, 100, 800, 20));
+		entityManager.addEntity(new Barrier(handler, 5000, 390, 800, 20));
+		entityManager.addEntity(new Barrier(handler, 5000, 100, 20, 600));
+		entityManager.addEntity(new Barrier(handler, 5390, 100, 20, 600));
 		
 		loadWorld(path);
 		
@@ -60,6 +72,7 @@ public class World {
 										(int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()) );
 			}
 		}
+		g.drawImage(Assets.celler, (int) (10000 - handler.getGameCamera().getxOffset()), (int)(200 - handler.getGameCamera().getyOffset()), 800, 600, null);
 		itemManager.render(g);
 		entityManager.render(g);
 		

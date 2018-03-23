@@ -34,6 +34,7 @@ public class Assets {
 	public static BufferedImage inventory;
 	public static BufferedImage chest;
 	public static BufferedImage interract;
+	public static BufferedImage celler;
 	//tiles graphics
 	public static BufferedImage grass, dirt, tree, rock;
 	// menu graphics
@@ -114,6 +115,7 @@ public class Assets {
 		chest = Utils.loadImage("/textures/chest.png");
 		inventory = Utils.loadImage("/textures/inventory.png");
 		interract = Utils.loadImage("/textures/interact.png");
+		celler = Utils.loadImage("/textures/celler.png");
 		
 		//loading font
 		menuFont = Utils.loadFont("/fonts/Gputeks-Regular.ttf");

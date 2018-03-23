@@ -1,6 +1,7 @@
 package main.display;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -42,6 +43,7 @@ public class Display {
 		canvas.setMinimumSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setFocusable(false);
+		canvas.setBackground(Color.BLACK);
 
 		frame.add(canvas);
 		frame.pack();
