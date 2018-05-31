@@ -156,6 +156,7 @@ public class MenuState extends State{
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
 				State.setState(handler.getGame().gameState);
+				
 			}}));
 		uiManager.addObject(new UIButton("Load Game", xPositionMenu , yPositionMenu + yPositionMenuHelper, widthButton, heightButton, 2,  true, Color.WHITE, Assets.menuFont.deriveFont(Font.PLAIN, fontSize ),  new ClickListener(){
 			public void onClick() {

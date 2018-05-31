@@ -1,5 +1,6 @@
 package main.entity.statics;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -41,6 +42,11 @@ public class Trap extends StaticEntity{
 		g.fillRect((int) (r.x - handler.getGameCamera().getxOffset()),
 				(int) (r.y - handler.getGameCamera().getyOffset()),
 				r.width, r.height);
+		g.setColor(Color.BLACK);
+		g.setFont(Assets.guiFont);
+		g.drawString("It's a trap", (int)(x - handler.getGameCamera().getxOffset()), (int)(y + 20 - handler.getGameCamera().getyOffset()));
+		g.drawString("It hurts", (int)(x - handler.getGameCamera().getxOffset()), (int)(y + 50 - handler.getGameCamera().getyOffset()));
+
 	}
 
 }

@@ -3,6 +3,7 @@ package main.states;
 import java.awt.Graphics;
 
 import main.Handler;
+import main.entity.creature.Player;
 import main.ui.Gui;
 import main.worlds.World;
 
@@ -20,10 +21,7 @@ public class GameState extends State{
 	//updating game state
 	public void update() 
 	{
-		if(handler.getKeyManager().pause) 
-			{
-				setState(handler.getGame().menuState); // test code
-			}
+		if(handler.getKeyManager().pause) setState(handler.getGame().menuState);
 		world.update();
 	}
 

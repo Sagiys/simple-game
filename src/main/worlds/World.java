@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import main.Handler;
 import main.entity.EntityManager;
+import main.entity.creature.Enemy;
 import main.entity.creature.Player;
 import main.entity.statics.Barrier;
 import main.entity.statics.Chest;
@@ -32,7 +33,16 @@ public class World {
 		this.handler = handler;
 		itemManager = new ItemManager(handler);
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100)); // 0
-		entityManager.addEntity(new Tree(handler, 100, 300)); // 1
+		entityManager.addEntity(new Tree(handler, 100, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 200, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 300, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 400, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 500, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 600, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 700, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 800, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 900, 440)); // 1
+		entityManager.addEntity(new Tree(handler, 1000, 440)); // 1
 		entityManager.addEntity(new Chest(handler, 300, 300)); // 1
 		entityManager.addEntity(new Trap(handler, 500, 300)); // 1
 		entityManager.addEntity(new House(handler, 800, 200));
@@ -42,6 +52,7 @@ public class World {
 		entityManager.addEntity(new Barrier(handler, 5000, 390, 800, 20));
 		entityManager.addEntity(new Barrier(handler, 5000, 100, 20, 600));
 		entityManager.addEntity(new Barrier(handler, 5390, 100, 20, 600));
+		entityManager.addEntity(new Enemy(handler, 500, 500));
 		
 		loadWorld(path);
 		

@@ -1,6 +1,7 @@
 package main.entity;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -44,7 +45,7 @@ public class EntityManager {
 			if(!e.isActive()) it.remove();
 		}
 		entities.sort(renderSorter);
-		if(handler.getKeyManager().k)
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_K))
 		{
 			handler.getWorld().getEntityManager().addEntity(new Tree(handler, handler.getMouseManager().getMouseX() + handler.getGameCamera().getxOffset(), handler.getMouseManager().getMouseY() + handler.getGameCamera().getyOffset()));
 		}

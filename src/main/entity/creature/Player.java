@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 
 import main.Handler;
 import main.entity.Entity;
-import main.entity.statics.Tree;
 import main.gfx.Animation;
 import main.gfx.Assets;
 import main.inventory.Inventory;
@@ -32,6 +31,7 @@ public class Player extends Creature{
 	private int lvl, currentXP, maxXP; 
 	private boolean lvlUp = false;
 	private int dmg;
+	private boolean debug = false;
 	
 	//temp attack variables
 	private long lastAttackTimer, attackCooldown = 100, attackTimer = attackCooldown;
@@ -85,13 +85,14 @@ public class Player extends Creature{
 	
 	public void die()
 	{
-		System.out.println("u died");
 	}
 
 	@Override
 	public void update() 
 	{
 		calculatePolygons();
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) debug = !debug;
 		
 		//updating movement animation
 		downAnimation.tick();
@@ -254,7 +255,7 @@ public class Player extends Creature{
 		g.drawImage(getCurrentAnimation(), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height,  null); 
 		//below debugging code
 		g.setColor(java.awt.Color.red);
-		g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
+		if(debug)g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
 				(int) (y + bounds.y - handler.getGameCamera().getyOffset()),
 				bounds.width, bounds.height);
 		g.setColor(java.awt.Color.blue);
@@ -346,5 +347,10 @@ public class Player extends Creature{
 
 	public void setDmg(int dmg) {
 		this.dmg = dmg;
+	}
+	
+	public void setLvl(int lvl)
+	{
+		this.lvl = lvl;
 	}
 }
